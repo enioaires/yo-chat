@@ -21,6 +21,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/signin",
+    signOut: "/signin",
   },
   providers: [
     GoogleProvider({

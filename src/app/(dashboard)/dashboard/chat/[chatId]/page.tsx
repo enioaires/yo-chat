@@ -1,8 +1,11 @@
+import ChatInput from '@/components/ChatInput'
+import Messages from '@/components/Messages'
 import { fetchRedis } from '@/helpers/redis'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { messageArrayValidator } from '@/lib/validations/message'
 import { getServerSession } from 'next-auth'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 interface PageProps {
@@ -41,11 +44,38 @@ const page = async ({ params }: PageProps) => {
     if (user.id !== userId1 && user.id !== userId2) notFound()
 
     const chatPartnerId = user.id === userId1 ? userId2 : userId1
-    const chatPartiner = (await db.get(`user:${chatPartnerId}`)) as User
+    const chatPartner = (await db.get(`user:${chatPartnerId}`)) as User
     const initialMessages = await getChatMessages(chatId)
 
     return (
-        <div>{user.name}</div>
+        <div className='pt-8 flex-1 justify-between flex flex-col h-full max-h-[calc(100vh-6rem)]'>
+            <div className='flex sm:items-center justify-between py-3 border-b-2 border-gray-200'>
+                <div className='relative flex items-center space-x-4 px-4'>
+                    <div className='relative'>
+                        <div className='relative w-8 h-8 sm:w-12 sm:h-12'>
+                            <Image
+                                fill
+                                referrerPolicy='no-referrer'
+                                className='rounded-full'
+                                src={chatPartner.image}
+                                alt={`${chatPartner.name}'s profile picture`}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='flex flex-col leading-tight'>
+                        <div className='text-xl flex items-center'>
+                            <span className='mr-3 font-semibold'>{chatPartner.name}</span>
+                        </div>
+
+                        <span className='text-xs text-slate-100'>{chatPartner.email}</span>
+                    </div>
+                </div>
+            </div>
+
+            <Messages initialMessages={initialMessages} sessionId={session.user.id} />
+            <ChatInput chatPartner={chatPartner} chatId={chatId} />
+        </div>
     )
 }
 

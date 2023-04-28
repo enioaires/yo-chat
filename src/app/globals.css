@@ -5,3 +5,30 @@
 body {
   @apply bg-gray-700 text-white;
 }
+
+@layer base {
+  container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.25rem;
+}
+
+.scrollbar-track-blue-lighter::-webkit-scrollbar-track {
+  --bg-opacity: 1;
+  background-color: #000;
+  background-color: rgba(55, 65, 81, var(--bg-opacity));
+}
+
+.scrollbar-thumb-blue::-webkit-scrollbar-thumb {
+  --bg-opacity: 1;
+  background-color: #000;
+  background-color: rgba(237, 250, 247, var(--bg-opacity));
+}
+
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+}

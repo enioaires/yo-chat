@@ -62,11 +62,11 @@ const Layout = async ({ children }: LayoutProps) => {
                                 Overview
                             </div>
 
-                            <ul role='list' className='-mx-2 mt-2 space-y-1'>
+                            <ul role='list' className='-mx-2 mt-2 space-y-1 '>
                                 {SidebarOption.map((option) => {
                                     const Icon = Icons[option.Icon]
                                     return (
-                                        <li key={option.id}>
+                                        <li key={option.id} className='hover:bg-slate-100 rounded'>
                                             <Link
                                                 href={option.href}
                                                 className='text-gray-700 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold'>
@@ -79,12 +79,12 @@ const Layout = async ({ children }: LayoutProps) => {
                                         </li>
                                     )
                                 })}
+                                <li className='hover:bg-slate-100 rounded'>
+                                    <FriendRequestSidebarOption initialUnseenRequestCount={unseenRequestCount} sessionId={session.user.id} />
+                                </li>
                             </ul>
                         </li>
 
-                        <li>
-                            <FriendRequestSidebarOption initialUnseenRequestCount={unseenRequestCount} sessionId={session.user.id} />
-                        </li>
 
                         <li className='-mx-6 mt-auto flex items-center'>
                             <div className='flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900'>

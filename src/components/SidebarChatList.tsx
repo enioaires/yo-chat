@@ -25,12 +25,12 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
     }, [pathname])
 
     return (
-        <ul role='list' className='max-h-[25rem] overflow-y-auto -mx-2 space-y-4'>
+        <ul role='list' className='max-h-[25rem] overflow-y-auto -mx-2 space-y-2'>
             {friends.map((friend, index) => {
                 const unseenMessagesCount = unseeMessages.filter((msg) => msg.senderId === friend.id).length
                 return (
                     <li key={friend.id} className=''>
-                        <a className='flex items-center gap-2' href={`/dashboard/chat/${chatHrefConstructor(sessionId, friend.id)}`}>
+                        <a className='flex items-center gap-2 hover:bg-slate-100 p-2 rounded' href={`/dashboard/chat/${chatHrefConstructor(sessionId, friend.id)}`}>
                             <div className='relative h-8 w-8'>
                                 <Image
                                     fill
